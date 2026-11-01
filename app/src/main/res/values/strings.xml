@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DPPify</string>
+    <string name="app_tagline">Learn • Practice • Excel</string>
+    <string name="offline_title">You\'re Offline</string>
+    <string name="offline_message">Please check your internet connection to continue learning with DPPify.</string>
+    <string name="retry">Try Again</string>
+    <string name="open_settings">Network Settings</string>
+</resources>

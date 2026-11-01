@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>DPPify - Offline Hub</title>
+  <meta name="theme-color" content="#0755D9">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+    }
+    .header {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+    .logo-badge {
+      width: 48px;
+      height: 48px;
+      background: #0755D9;
+      color: #FFC928;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(7, 85, 217, 0.25);
+    }
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0755D9;
+      letter-spacing: -0.5px;
+    }
+    .brand-tagline {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .status-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: #eff6ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0755D9;
+      font-size: 32px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+    p {
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .btn-retry {
+      background: #0755D9;
+      color: #ffffff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      width: 100%;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(7, 85, 217, 0.3);
+    }
+    .btn-retry:active {
+      background: #053e9e;
+      transform: translateY(1px);
+    }
+    .offline-hub {
+      width: 100%;
+      max-width: 480px;
+      text-align: left;
+    }
+    .hub-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0755D9;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quiz-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+    .question {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: #FFF5D6;
+      color: #8C6200;
+    }
+    .options {
+      display: grid;
+      gap: 8px;
+    }
+    .opt-btn {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .opt-btn.correct {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+      font-weight: 700;
+    }
+    .opt-btn.wrong {
+      background: #fef2f2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-badge">D</div>
+    <div>
+      <div class="brand-title">DPPify</div>
+      <div class="brand-tagline">Learn • Practice • Excel</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="status-icon">📡</div>
+    <h2>You're Currently Offline</h2>
+    <p>We couldn't connect to DPPify online servers. Check your Wi-Fi or mobile data connection and tap below to reconnect.</p>
+    <button class="btn-retry" onclick="window.AndroidBridge ? window.AndroidBridge.retryConnection() : window.location.reload()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+      Try Reconnecting
+    </button>
+  </div>
+
+  <div class="offline-hub">
+    <div class="hub-title">
+      <span>💡</span> Quick Offline DPP Revision
+    </div>
+
+    <div class="quiz-card">
+      <span class="badge">Science • Class 6-8</span>
+      <div class="question">Which gas do plants primarily absorb during the process of photosynthesis?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkAnswer(this, false)">Oxygen (O₂)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, true)">Carbon Dioxide (CO₂)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, false)">Nitrogen (N₂)</button>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <span class="badge">Maths • Rapid Recall</span>
+      <div class="question">What is the sum of angles of a triangle in degrees?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="checkAnswer(this, false)">90°</button>
+        <button class="opt-btn" onclick="checkAnswer(this, false)">360°</button>
+        <button class="opt-btn" onclick="checkAnswer(this, true)">180°</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(btn, isCorrect) {
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll('.opt-btn');
+      buttons.forEach(b => b.disabled = true);
+      if (isCorrect) {
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('wrong');
+        buttons.forEach(b => {
+          if (b.innerText.includes('CO₂') || b.innerText.includes('180°')) {
+            b.classList.add('correct');
+          }
+        });
+      }
+    }
+
+    // Auto-reload when online
+    window.addEventListener('online', () => {
+      if (window.AndroidBridge) {
+        window.AndroidBridge.retryConnection();
+      } else {
+        window.location.reload();
+      }
+    });
+  </script>
+</body>
+</html>

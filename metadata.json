@@ -1,0 +1,6 @@
+{
+  "name": "DPPify",
+  "description": "Official DPPify Android app for NCERT educational content, Daily Practice Problems (DPP), interactive quizzes, and class 6-8 learning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
